@@ -2,9 +2,10 @@ import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import fetch from 'node-fetch';
 import { setContext } from 'apollo-link-context';
 
+//uri: 'http://localhost:4000/',
 //uri: 'https://vast-plains-73484.herokuapp.com/',
 const httpLink = createHttpLink({
-    uri: 'http://localhost:4000/',
+    uri: 'https://vast-plains-73484.herokuapp.com/',
     fetch
 });
 
