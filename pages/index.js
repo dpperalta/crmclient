@@ -33,9 +33,14 @@ export default function Index() {
   }
 
   if(!data.obtenerClientesVendedor){
-    router.push('/productos');
-    location.reload();
-    return <p className="text-gray-800 bg-gray-400">Cargando...</p>;
+    if(token){
+      router.push('/login');
+      location.reload();
+    } else{
+      router.push('/productos');
+      location.reload();
+      return <p className="text-gray-800 bg-gray-400">Cargando...</p>;
+    }
   } 
   
   return (
