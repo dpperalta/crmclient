@@ -34,6 +34,7 @@ export default function Index() {
 
   if(!data.obtenerClientesVendedor){
     if(token && !data.obtenerClientesVendedor){
+      localStorage.removeItem('token');
       router.push('/login');
       location.reload();
       return <p>Redireccionando...</p>
