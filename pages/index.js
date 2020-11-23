@@ -3,6 +3,7 @@ import Cliente from '../components/Cliente';
 import { gql, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { useState } from 'react';
 
 const OBTENER_CLIENTES_USUARIOS = gql`
   query obtenerClientesVendedor {
@@ -19,6 +20,8 @@ const OBTENER_CLIENTES_USUARIOS = gql`
 
 export default function Index() {
   
+  const [ firstLoad, setFirstLoad ] = useState(true);
+
   const router = useRouter();
   // Consulta de clientes
   const { data, loading, error } = useQuery(OBTENER_CLIENTES_USUARIOS);
@@ -29,11 +32,12 @@ export default function Index() {
 
   if(!token){
     router.push('/login');
+    setFirstLoad(false);
     return <p>Cargando...</p>;
   }
 
   if(!data.obtenerClientesVendedor){
-    if(token && !data.obtenerClientesVendedor){
+    if(token && !data.obtenerClientesVendedor && firstLoad === true){
       localStorage.removeItem('token');
       router.push('/login');
       location.reload();
